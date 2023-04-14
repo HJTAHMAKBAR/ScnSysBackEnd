@@ -1,4 +1,4 @@
-package com.huang.scnsysbackend.controller;
+package com.huang.scnsysbackend.service;
 
 import com.huang.scnsysbackend.pojo.Type;
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -6,27 +6,26 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping(value = "/api/v1")
-public class NERController {
+@Service
+public class ExtractEntities {
 
     @Autowired
     private StanfordCoreNLP stanfordCoreNLP;
 
-    @PostMapping
-    @RequestMapping(value = "/ner")
-    public Set<String> ner(@RequestBody final String input, @RequestParam final Type type) {
+    public Map<String, Set<String>> getEntities(String input) {
+        Map<String, Set<String>> map = new HashMap();
         CoreDocument coreDocument = new CoreDocument(input);
         stanfordCoreNLP.annotate(coreDocument);
         List<CoreLabel> coreLabels = coreDocument.tokens();
-        return new HashSet<>(collectList(coreLabels, type));
+        map.put("person", new HashSet<>(collectList(coreLabels, Type.PERSON)));
+        map.put("country", new HashSet<>(collectList(coreLabels, Type.COUNTRY)));
+        map.put("city", new HashSet<>(collectList(coreLabels, Type.CITY)));
+        return map;
     }
 
     private List<String> collectList(List<CoreLabel> coreLabels, final Type type) {
