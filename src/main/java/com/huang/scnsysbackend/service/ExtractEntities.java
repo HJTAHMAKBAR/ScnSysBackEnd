@@ -25,6 +25,8 @@ public class ExtractEntities {
         map.put("person", new HashSet<>(collectList(coreLabels, Type.PERSON)));
         map.put("country", new HashSet<>(collectList(coreLabels, Type.COUNTRY)));
         map.put("city", new HashSet<>(collectList(coreLabels, Type.CITY)));
+        map.put("organization", new HashSet<>(collectList(coreLabels, Type.ORGANIZATION)));
+        map.put("location", new HashSet<>(collectList(coreLabels, Type.LOCATION)));
         return map;
     }
 
