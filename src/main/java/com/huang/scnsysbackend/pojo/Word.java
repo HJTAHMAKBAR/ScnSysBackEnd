@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileEntity {
+public class Word {
     private String name;
-    private FileInfo list;
+    private Integer value;
 }
