@@ -24,4 +24,9 @@ public class MultipleDocRelationalGraph {
         }
         return RespBean.success("成功获取词云数据", wordList);
     }
+
+    @PostMapping("/relation-graph")
+    public RespBean getRelationGraph() {
+        return RespBean.success("成功获取关系图谱数据");
+    }
 }
