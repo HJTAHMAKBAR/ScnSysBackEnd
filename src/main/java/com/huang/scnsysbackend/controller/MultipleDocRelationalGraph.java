@@ -47,9 +47,9 @@ public class MultipleDocRelationalGraph {
                 lines.add(new Line(associationNodes.get(i), associationNodes.get(i + 1)));
             }
         });
-        Map<String, Object> json = new HashMap<>();
-        json.put("nodes", nodes);
-        json.put("lines", lines);
-        return RespBean.success("成功获取关系图谱数据", json);
+        Map<String, Object> res = new HashMap<>();
+        res.put("nodes", nodes);
+        res.put("lines", lines);
+        return RespBean.success("成功获取关系图谱数据", res);
     }
 }
